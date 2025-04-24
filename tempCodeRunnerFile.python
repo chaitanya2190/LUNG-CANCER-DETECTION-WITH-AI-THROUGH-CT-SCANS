@@ -1,0 +1,19 @@
+import sqlite3
+
+def print_all_patients():
+    conn = sqlite3.connect('patients.db')
+    c = conn.cursor()
+    c.execute('SELECT * FROM patient')
+    rows = c.fetchall()
+    conn.close()
+
+    if rows:
+        print("ID | Name | Age | Sex | Date of Entry")
+        print("----------------------------------------")
+        for row in rows:
+            print(f"{row[0]} | {row[1]} | {row[2]} | {row[3]} | {row[4]}")
+    else:
+        print("No records found in the database.")
+
+if __name__ == "__main__":
+    print_all_patients()
